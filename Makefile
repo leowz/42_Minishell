@@ -25,7 +25,10 @@ HEADER = $(HEADER_PATH)/minishell.h
 
 SRC_PATH = srcs
 
-SRC_NAME = minishell.c 
+SRC_NAME = minishell.c ms_basename.c ms_env.c ms_env_utile.c ms_exec_expansion.c \
+            ms_utile.c ms_signal.c ms_error.c \
+            ms_builtin.c ms_builtin_cd.c ms_builtin_echo.c ms_builtin_env.c ms_builtin_exit.c \
+            ms_local_bin.c ms_exec_global_bin.c ms_strsplit.c
 
 OBJ_PATH = ./obj
 
@@ -35,7 +38,7 @@ CPPFLAGS = -I$(HEADER_PATH) -I$(LIB_PATH)/includes
 
 LDFLAGS = -L$(LIB_PATH)
 
-LDLIBS = -lft -fsanitize=address
+LDLIBS = -lft #-fsanitize=address
 
 CFLAGS =  -Wall -Wextra -Werror
 
@@ -47,8 +50,8 @@ OBJS = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 BLACK:="\033[1;30m"
 RED:="\033[1;31m"
 GREEN:="\033[1;32m"
-CYAN:="\033[1;35m"
-PURPLE:="\033[1;36m"
+PURPLE:="\033[1;35m"
+CYAN:="\033[1;36m"
 WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
 #  # ==================
