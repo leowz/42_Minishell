@@ -61,7 +61,7 @@ void	ms_expande_param(char **param)
 	}
 }
 
-void	ms_exec_expasion(char **argv)
+void	ms_exec_expansion(char **argv)
 {
 	int		i;
 

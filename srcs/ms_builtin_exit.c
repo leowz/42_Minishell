@@ -12,10 +12,42 @@
 
 #include "minishell.h"
 
-void	ms_builtin_exit(void)
+int     pf_is_numeric(char *str)
 {
-	ft_printf("%s\n", "Bye~");
-	ms_die(EXIT_SUCCESS);
+    if (!str)
+        return (FUN_FAIL);
+    while (*str)
+    {
+        if (!ft_isdigit(*str))
+        	return (FUN_FAIL);
+		str++;
+    }
+    return (FUN_SUCS);
+}
+
+void	ms_builtin_exit(char **argv, int status)
+{
+    int     size;
+
+	if (!argv || !*argv)
+		return ;
+	size = ms_tab_size(argv);
+	if (size <= 2)
+	{
+		ft_printf("%s\n", "Bye~");
+		if (size == 2) {
+			if (pf_is_numeric(argv[1]))
+				ms_die(ft_atoi(argv[1]));
+			else
+			{
+				ms_error("exit", "numeric argument required", argv[1]);
+				ms_die(EXIT_FAILURE);
+			}
+		}
+		ms_die(status);
+	}
+	else
+		ms_error("exit", "too many arguments", "");
 }
 
 int		ms_builtin_pwd(void)
@@ -31,7 +63,7 @@ int		ms_builtin_pwd(void)
 	}
 	else
 	{
-		ms_error("Error cwd NULL");
+		ft_dprintf(STDERR_FILENO, "pwd: cwd NULL\n");
 		ret = EXIT_FAILURE;
 	}
 	return (ret);

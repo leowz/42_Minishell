@@ -27,7 +27,7 @@ int		ms_is_empty_cmd(char *input)
 	return (ret);
 }
 
-int		ms_exec_command(char *cmd)
+int		ms_exec_command(char *cmd, int status)
 {
 	char	**argv;
 	int		ret;
@@ -35,9 +35,9 @@ int		ms_exec_command(char *cmd)
 	ret = EXIT_SUCCESS;
 	if ((argv = ms_strsplit(cmd, ' ', "\'\"")) && ms_trim_argv(argv))
 	{
-		ms_exec_expasion(argv);
+		ms_exec_expansion(argv);
 		if (ms_is_builtin(argv[0]))
-			ret = ms_exec_builtin(argv);
+			ret = ms_exec_builtin(argv, status);
 		else if (ms_is_local_bin(argv[0]))
 			ret = ms_exec_local_bin(argv);
 		else
@@ -47,7 +47,7 @@ int		ms_exec_command(char *cmd)
 	return (ret);
 }
 
-int		ms_process_commands(char *input)
+int		ms_process_commands(char *input, int status)
 {
 	char	**cmd_tab;
 	char	**tab_ptr;
@@ -60,7 +60,7 @@ int		ms_process_commands(char *input)
 		while (tab_ptr && *tab_ptr)
 		{
 			if (!ms_is_empty_cmd(*tab_ptr))
-				ret = ms_exec_command(*tab_ptr);
+				ret = ms_exec_command(*tab_ptr, status);
 			tab_ptr++;
 		}
 		ms_delete_tab(&cmd_tab);
@@ -88,7 +88,6 @@ int		main(int ac, char **av, char **environ)
 	(void)ac;
 	(void)av;
 	ms_init_env(&g_env, environ);
-	ms_install_signal_handler();
 	ret = EXIT_SUCCESS;
 	while (42)
 	{
@@ -96,7 +95,7 @@ int		main(int ac, char **av, char **environ)
 		if ((get_next_line(STDIN_FILENO, &input) > 0))
 		{
 			if (!ms_is_empty_cmd(input))
-				ret = ms_process_commands(input);
+				ret = ms_process_commands(input, ret);
 		}
 		else
 			break ;

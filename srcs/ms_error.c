@@ -12,24 +12,16 @@
 
 #include "minishell.h"
 
-void	ms_error(const char *msg)
+void	ms_error(const char *cmd, const char *msg, const char *cause)
 {
-	if (!msg)
+	if (!msg || !cmd || !cause)
 		return ;
-	ft_dprintf(STDERR_FILENO, "minishell: %s\n", msg);
+	ft_dprintf(STDERR_FILENO, "%s: %s: %s\n", cmd, msg, cause);
 }
 
 void	ms_die(int status)
 {
 	exit(status);
-}
-
-void	ms_error_and_die(const char *msg, int status)
-{
-	if (!msg)
-		return ;
-	ms_error(msg);
-	ms_die(status);
 }
 
 int		ms_is_exit(char *line)

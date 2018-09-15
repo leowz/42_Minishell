@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+void	pf_update_env(char *opwd)
+{
+	char	*cwd;
+
+	if ((cwd = getcwd(NULL, 0)))
+	{
+		ms_update_entry(&g_env, "PWD", cwd);
+		ft_strdel(&cwd);
+	}
+	ms_update_entry(&g_env, "OLDPWD", opwd);
+}
+
 int		ms_change_dir(char *path, int print_path)
 {
 	char	*cwd;
@@ -22,7 +34,7 @@ int		ms_change_dir(char *path, int print_path)
 	{
 		if (print_path)
 			ft_printf("%s\n", path);
-		ms_update_entry(&g_env, "OLDPWD", cwd);
+		pf_update_env(cwd);
 		ret = EXIT_SUCCESS;
 	}
 	else

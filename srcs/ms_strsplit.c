@@ -48,7 +48,7 @@ static int		pft_count_word(char const *s, char c, char *quote)
 			counted = 0;
 		if (in_quote >= 0 && *s == quote[in_quote])
 			in_quote = -1;
-		if (in_quote < 0 && (ft_strchr(quote, *s)) && (ft_strchr(s + 1, *s)))
+		else if (in_quote < 0 && (ft_strchr(quote, *s)) && (ft_strchr(s + 1, *s)))
 			in_quote = ft_strchr(quote, *s) - quote;
 		s++;
 	}
@@ -91,7 +91,7 @@ static char		*pft_next_word(char const **s, char c, char *quote)
 	{
 		if (in_quote >= 0 && *tp == quote[in_quote])
 			in_quote = -1;
-		if (in_quote < 0 && (ft_strchr(quote, *tp)) &&
+		else if (in_quote < 0 && (ft_strchr(quote, *tp)) &&
 				(ft_strchr(tp + 1, *tp)))
 			in_quote = ft_strchr(quote, *tp) - quote;
 		tp++;

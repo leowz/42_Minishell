@@ -32,7 +32,12 @@ int		ms_exec_local_bin(char **argv)
 	{
 		if (execve(argv[0], argv, g_env.tab) < 0)
 		{
-			ft_printf("%s: Command not found.\n", argv[0]);
+			if (access(argv[0], F_OK) == -1)
+				ms_error("minishell", "no such file or directory", argv[0]);
+			else if (access(argv[0], X_OK) == -1)
+				ms_error("minishell", "permission denied", argv[0]);
+			else
+			    ms_error("minishell", "execution fail", argv[0]);
 			exit(EXIT_FAILURE);
 		}
 	}

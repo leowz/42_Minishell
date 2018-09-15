@@ -27,3 +27,41 @@ void	ms_init_env(t_env *env, char **environ)
 		}
 	}
 }
+
+void	ms_delete_tab(char ***tab)
+{
+	char	**tab_t;
+
+	if (!tab || !*tab)
+		return ;
+	tab_t = *tab;
+	while (tab_t && *tab_t)
+	{
+		free(*tab_t);
+		tab_t++;
+	}
+	free(*tab);
+	*tab = NULL;
+}
+
+void	ms_print_tab(char **tab)
+{
+	while (tab && *tab)
+	{
+		ft_printf("%s\n", *tab);
+		tab++;
+	}
+}
+
+int		ms_tab_size(char **tab)
+{
+	int ret;
+
+	ret = 0;
+	if (tab && *tab)
+	{
+		while (tab[ret])
+			ret++;
+	}
+	return (ret);
+}

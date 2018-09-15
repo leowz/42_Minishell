@@ -12,59 +12,33 @@
 
 #include "minishell.h"
 
-void	ms_delete_tab(char ***tab)
-{
-	char	**tab_t;
-
-	if (!tab || !*tab)
-		return ;
-	tab_t = *tab;
-	while (tab_t && *tab_t)
-	{
-		free(*tab_t);
-		tab_t++;
-	}
-	free(*tab);
-	*tab = NULL;
-}
-
-void	ms_print_tab(char **tab)
-{
-	while (tab && *tab)
-	{
-		ft_printf("%s| size %d\n", *tab, ft_strlen(*tab));
-		tab++;
-	}
-}
-
-int		ms_tab_size(char **tab)
-{
-	int ret;
-
-	ret = 0;
-	if (tab && *tab)
-	{
-		while (tab[ret])
-			ret++;
-	}
-	return (ret);
-}
-
 void	ms_trim(char *str)
 {
 	char	*p1;
-	char	*p2;
 
 	if (!(p1 = str) || ft_strlen(p1) == 0)
 		return ;
-	p2 = p1 + ft_strlen(p1) - 1;
-	while (p2 >= p1 && (*p2 == '\t' || *p2 == ' ' || *p2 == '\v'))
+	while (*p1 && (*p1 == '\t' || *p1 == ' ' || *p1 == '\v'))
 	{
-		*p2 = 0;
-		p2--;
+		if (ft_strlen(p1 + 1) == 0)
+			return;
+		else
+			ft_strcpy(p1, p1 + 1);
 	}
-	while (*p1 && p1 < p2 && (*p1 == '\t' || *p1 == ' ' || *p1 == '\v'))
-		ft_memmove(p1, p1 + 1, ft_strlen(p1));
+}
+
+
+int		pf_need_change(char *str)
+{
+	if (!str || !(ft_strlen(str) > 0))
+		return (1);
+	while (*str)
+	{
+	    if (*str != ' ' && *str != '\t' && *str != '\v')
+	    	return (0);
+	    str++;
+	}
+	return (1);
 }
 
 void	ms_argv_relex(char **av)
@@ -74,12 +48,12 @@ void	ms_argv_relex(char **av)
 
 	while (av && *av)
 	{
-		if (!(ft_strlen(*av) > 0))
+		if (pf_need_change(*av))
 		{
 			ptr = av + 1;
 			while (ptr && *ptr)
 			{
-				if (ft_strlen(*ptr) > 0)
+				if (!pf_need_change(*ptr))
 				{
 					tmp = *av;
 					*av = *ptr;
@@ -90,6 +64,22 @@ void	ms_argv_relex(char **av)
 			}
 		}
 		av++;
+	}
+}
+
+void	ms_argv_remove(char **av)
+{
+	char	**ptr;
+
+	if (!av)
+		return ;
+	ptr = av;
+	while (*ptr && !(pf_need_change(*ptr)))
+		ptr++;
+	while (*ptr)
+	{
+		ft_strdel(ptr);
+		ptr++;
 	}
 }
 
@@ -106,5 +96,6 @@ int		ms_trim_argv(char **av)
 		ptr++;
 	}
 	ms_argv_relex(av);
+	ms_argv_remove(av);
 	return (FUN_SUCS);
 }

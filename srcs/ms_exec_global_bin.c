@@ -90,8 +90,7 @@ int		ms_exec_global_bin(char **argv)
 		}
 		i++;
 	}
-	ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n",
-			"command not found", argv[0]);
+	ms_error("minishell", "command not found", argv[0]);
 	ms_delete_tab(&path);
 	return (EXIT_FAILURE);
 }

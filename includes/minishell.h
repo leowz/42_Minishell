@@ -41,7 +41,6 @@ typedef struct	s_env
 
 t_env			g_env;
 
-void			ms_install_signal_handler(void);
 int				ms_trim_argv(char **argv);
 
 void			ms_print_tab(char **tab);
@@ -54,17 +53,16 @@ void			ms_insert_entry(t_env *env, char *line);
 void			ms_delete_entry(t_env *env, int index);
 int				ms_search_entry(t_env *env, const char *name);
 void			ms_update_entry(t_env *env, const char *name, const char*value);
-void			ms_exec_expasion(char **argv);
-int				ms_is_builtin(const char *cmd);
-int				ms_exec_builtin(char **argv);
-void			ms_setenv(char *key, char *value);
-void			ms_error(const char *msg);
-void			ms_die(int status);
-void			ms_error_and_die(const char *msg, int status);
 char			*ms_get_env_var(const char *name);
+void			ms_exec_expansion(char **argv);
+int				ms_is_builtin(const char *cmd);
+int				ms_exec_builtin(char **argv, int status);
+void			ms_setenv(char *key, char *value);
+void			ms_error(const char *cmd, const char *msg, const char *cause);
+void			ms_die(int status);
 int				ms_is_exit(char *line);
 char			**ms_strsplit(char const *s, char c, char *quote);
-void			ms_builtin_exit(void);
+void			ms_builtin_exit(char **argv, int status);
 int				ms_builtin_echo(char **argv);
 int				ms_builtin_env(void);
 int				ms_builtin_pwd(void);

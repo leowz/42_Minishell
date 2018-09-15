@@ -26,7 +26,7 @@ HEADER = $(HEADER_PATH)/minishell.h
 SRC_PATH = srcs
 
 SRC_NAME = minishell.c ms_basename.c ms_env.c ms_env_utile.c ms_exec_expansion.c \
-            ms_utile.c ms_signal.c ms_error.c \
+            ms_utile.c ms_error.c \
             ms_builtin.c ms_builtin_cd.c ms_builtin_echo.c ms_builtin_env.c ms_builtin_exit.c \
             ms_local_bin.c ms_exec_global_bin.c ms_strsplit.c
 
