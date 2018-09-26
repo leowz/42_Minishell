@@ -6,7 +6,7 @@
 /*   By: zweng <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:42:35 by zweng             #+#    #+#             */
-/*   Updated: 2018/09/09 11:42:47 by zweng            ###   ########.fr       */
+/*   Updated: 2018/09/26 19:18:42 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ void	ms_trim(char *str)
 	while (*p1 && (*p1 == '\t' || *p1 == ' ' || *p1 == '\v'))
 	{
 		if (ft_strlen(p1 + 1) == 0)
-			return;
+			return ;
 		else
 			ft_strcpy(p1, p1 + 1);
 	}
 }
-
 
 int		pf_need_change(char *str)
 {
@@ -34,9 +33,9 @@ int		pf_need_change(char *str)
 		return (1);
 	while (*str)
 	{
-	    if (*str != ' ' && *str != '\t' && *str != '\v')
-	    	return (0);
-	    str++;
+		if (*str != ' ' && *str != '\t' && *str != '\v')
+			return (0);
+		str++;
 	}
 	return (1);
 }

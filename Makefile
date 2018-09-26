@@ -6,7 +6,7 @@
 #    By: zweng <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 18:11:43 by zweng             #+#    #+#              #
-#    Updated: 2018/07/29 12:08:49 by zweng            ###   ########.fr        #
+#    Updated: 2018/09/26 19:16:59 by zweng            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,7 @@ fclean: clean
 re: fclean all
 
 norme:
-	@norminette $(SRC_NAME)
+	@norminette $(SRCS)
 	@norminette $(HEADER_PATH)/*.h
 
 .PHONY: clean fclean all

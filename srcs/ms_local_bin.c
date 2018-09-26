@@ -6,7 +6,7 @@
 /*   By: zweng <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:38:30 by zweng             #+#    #+#             */
-/*   Updated: 2018/09/09 11:38:48 by zweng            ###   ########.fr       */
+/*   Updated: 2018/09/26 19:19:55 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ms_exec_local_bin(char **argv)
 			else if (access(argv[0], X_OK) == -1)
 				ms_error("minishell", "permission denied", argv[0]);
 			else
-			    ms_error("minishell", "execution fail", argv[0]);
+				ms_error("minishell", "execution fail", argv[0]);
 			exit(EXIT_FAILURE);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: zweng <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:40:09 by zweng             #+#    #+#             */
-/*   Updated: 2018/09/09 11:41:12 by zweng            ###   ########.fr       */
+/*   Updated: 2018/09/26 19:23:45 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int		pft_count_word(char const *s, char c, char *quote)
 			counted = 0;
 		if (in_quote >= 0 && *s == quote[in_quote])
 			in_quote = -1;
-		else if (in_quote < 0 && (ft_strchr(quote, *s)) && (ft_strchr(s + 1, *s)))
+		else if (in_quote < 0 && (ft_strchr(quote, *s)) &&
+				(ft_strchr(s + 1, *s)))
 			in_quote = ft_strchr(quote, *s) - quote;
 		s++;
 	}

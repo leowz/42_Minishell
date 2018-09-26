@@ -6,7 +6,7 @@
 /*   By: zweng <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:32:29 by zweng             #+#    #+#             */
-/*   Updated: 2018/09/09 11:32:48 by zweng            ###   ########.fr       */
+/*   Updated: 2018/09/26 19:36:59 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int		ms_builtin_env(void)
 
 int		pf_is_name(const char *str)
 {
-    if (!str)
-    	return (FUN_FAIL);
-    if (ft_isalpha(*str) || *str == '_')
+	if (!str)
+		return (FUN_FAIL);
+	if (ft_isalpha(*str) || *str == '_')
 	{
 		while (*str)
 		{
-			if (!ft_isalpha(*str) && !ft_isdigit(*str) && *str != '-')
+			if (!ft_isalpha(*str) && !ft_isdigit(*str) && *str != '_')
 				return (FUN_FAIL);
 			str++;
 		}
@@ -47,7 +47,7 @@ int		ms_builtin_setenv(char **argv)
 	size = ms_tab_size(argv);
 	if (size == 1)
 		ms_print_tab(g_env.tab);
-	else if (size == 2 && pf_is_name(argv[1]))
+	else if (size == 2)
 	{
 		if ((ptr = ft_strchr(argv[1], '=')))
 		{
@@ -57,7 +57,8 @@ int		ms_builtin_setenv(char **argv)
 	}
 	else if (size > 2 && pf_is_name(argv[1]))
 		ms_update_entry(&g_env, argv[1], argv[2]);
-	else {
+	else
+	{
 		ms_error(argv[0], "not an identifier", argv[1]);
 		return (EXIT_FAILURE);
 	}
