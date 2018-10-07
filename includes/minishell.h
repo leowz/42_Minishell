@@ -6,7 +6,7 @@
 /*   By: zweng <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:43:50 by zweng             #+#    #+#             */
-/*   Updated: 2018/09/09 11:48:26 by zweng            ###   ########.fr       */
+/*   Updated: 2018/10/07 12:23:31 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct	s_env
 t_env			g_env;
 
 int				ms_trim_argv(char **argv);
-
 void			ms_print_tab(char **tab);
+void			ms_display_prompt(int ret);
 int				ms_tab_size(char **tab);
 void			ms_delete_tab(char ***tab);
 char			*ms_basename(const char *filename);
@@ -72,4 +72,6 @@ int				ms_builtin_cd(char **argv);
 int				ms_is_local_bin(char *cmd);
 int				ms_exec_local_bin(char **argv);
 int				ms_exec_global_bin(char **argv);
+void			ms_signal_handler(int sig);
+void			ms_proc_signal_handler(int sig);
 #endif

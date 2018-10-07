@@ -6,7 +6,7 @@
 /*   By: zweng <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 11:18:54 by zweng             #+#    #+#             */
-/*   Updated: 2018/09/09 11:18:59 by zweng            ###   ########.fr       */
+/*   Updated: 2018/10/07 12:42:23 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		ms_exec_command(char *cmd, int status)
 	int		ret;
 
 	ret = EXIT_SUCCESS;
+	signal(SIGINT, ms_proc_signal_handler);
 	if ((argv = ms_strsplit(cmd, ' ', "\'\"")) && ms_trim_argv(argv))
 	{
 		ms_exec_expansion(argv);
@@ -92,6 +93,7 @@ int		main(int ac, char **av, char **environ)
 	while (42)
 	{
 		ms_display_prompt(ret);
+		signal(SIGINT, ms_signal_handler);
 		if ((get_next_line(STDIN_FILENO, &input) > 0))
 		{
 			if (!ms_is_empty_cmd(input))

@@ -6,7 +6,7 @@
 #    By: zweng <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 18:11:43 by zweng             #+#    #+#              #
-#    Updated: 2018/09/26 19:16:59 by zweng            ###   ########.fr        #
+#    Updated: 2018/10/07 12:23:54 by zweng            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_PATH = srcs
 SRC_NAME = minishell.c ms_basename.c ms_env.c ms_env_utile.c ms_exec_expansion.c \
             ms_utile.c ms_error.c \
             ms_builtin.c ms_builtin_cd.c ms_builtin_echo.c ms_builtin_env.c ms_builtin_exit.c \
-            ms_local_bin.c ms_exec_global_bin.c ms_strsplit.c
+            ms_local_bin.c ms_exec_global_bin.c ms_strsplit.c ms_signal.c
 
 OBJ_PATH = ./obj
 
